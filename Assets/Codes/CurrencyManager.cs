@@ -1,55 +1,73 @@
 using UnityEngine;
+using TMPro;
+
+public static class StaticCurrency
+{
+    public static long Gold = 0; // 기본값 설정
+    public static int Jewelry = 0; // 기본값 설정
+}
 
 public class CurrencyManager : MonoBehaviour
 {
-    [Header("Currency Settings")]
-    public long maxCurrency = 99999999999; // 재화 최대치
-    private long currentCurrency = 0;     // 현재 보유 재화
+    [Header("UI Settings")]
+    public TextMeshProUGUI goldText; // Gold UI Text
+    public TextMeshProUGUI jewelryText; // Jewelry UI Text
 
-    // 현재 재화를 UI로 표시 (UI Text 또는 TMP 사용)
-    public TMPro.TextMeshProUGUI currencyText;
-
-    void Start()
+    private void Start()
     {
-        UpdateCurrencyUI(); // 시작 시 UI 초기화
+        UpdateCurrencyUI(); // UI 초기화
     }
 
-    // 재화 획득 함수
-    public void AddCurrency(long amount)
+    // Gold 추가
+    public void AddGold(long amount)
     {
-        // 현재 재화 + 추가 재화가 최대치를 초과하지 않도록 제한
-        currentCurrency = System.Math.Min(currentCurrency + amount, maxCurrency);
+        StaticCurrency.Gold = System.Math.Min(StaticCurrency.Gold + amount, 99999999999);
         UpdateCurrencyUI();
     }
 
-    // 재화 사용 함수
-    public bool SpendCurrency(long amount)
+    // Jewelry 추가
+    public void AddJewelry(int amount)
     {
-        if (currentCurrency >= amount)
+        StaticCurrency.Jewelry = Mathf.Min(StaticCurrency.Jewelry + amount, 99999);
+        UpdateCurrencyUI();
+    }
+
+    // Gold 사용
+    public bool SpendGold(long amount)
+    {
+        if (StaticCurrency.Gold >= amount)
         {
-            currentCurrency -= amount;
+            StaticCurrency.Gold -= amount;
             UpdateCurrencyUI();
-            return true; // 사용 성공
+            return true;
         }
-        else
-        {
-            Debug.Log("Not enough currency!"); // 재화 부족
-            return false; // 사용 실패
-        }
+        Debug.Log("Not enough Gold!");
+        return false;
     }
 
-    // 현재 재화 값 반환
-    public long GetCurrency()
+    // Jewelry 사용
+    public bool SpendJewelry(int amount)
     {
-        return currentCurrency;
+        if (StaticCurrency.Jewelry >= amount)
+        {
+            StaticCurrency.Jewelry -= amount;
+            UpdateCurrencyUI();
+            return true;
+        }
+        Debug.Log("Not enough Jewelry!");
+        return false;
     }
 
-    // UI 업데이트 함수
+    // UI 업데이트
     private void UpdateCurrencyUI()
     {
-        if (currencyText != null)
+        if (goldText != null)
         {
-            currencyText.text = currentCurrency.ToString("N0"); // 3자리마다 콤마 추가
+            goldText.text = StaticCurrency.Gold.ToString("N0");
+        }
+        if (jewelryText != null)
+        {
+            jewelryText.text = StaticCurrency.Jewelry.ToString("N0");
         }
     }
 }

@@ -7,11 +7,6 @@ public class PanelController : MonoBehaviour
 
     private bool isPanelOpen = false; // 초기 상태: 닫혀 있음
 
-    void Start()
-    {
-        // Panel을 처음에 비활성화
-        panel.SetActive(false);
-    }
 
     public void TogglePanel()
     {
@@ -20,7 +15,6 @@ public class PanelController : MonoBehaviour
             // 창 닫기
             animator.SetTrigger("doHide");
             isPanelOpen = false;
-            StartCoroutine(DeactivatePanelAfterAnimation());
         }
         else
         {
@@ -30,11 +24,5 @@ public class PanelController : MonoBehaviour
             animator.SetTrigger("doShow");
             isPanelOpen = true;
         }
-    }
-
-    private IEnumerator DeactivatePanelAfterAnimation()
-    {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        panel.SetActive(false);
     }
 }
