@@ -33,7 +33,7 @@ public class StageManager : MonoBehaviour
     // Jewelry 보상 생성 (0 ~ 5, 높은 값은 낮은 확률로)
     private int GenerateJewelryReward(int stageNumber)
     {
-        int[] rewards = { 0, 1, 2, 3, 4, 5 };
+        int[] rewards = { 100, 100, 100, 100, 100, 100 };
         float[] probabilities = { 0.4f, 0.3f, 0.15f, 0.1f, 0.04f, 0.01f };
 
         return GenerateWeightedRandom(rewards, probabilities);
@@ -42,7 +42,7 @@ public class StageManager : MonoBehaviour
     // Gold 보상 생성 (1 ~ 1000, 높은 값은 낮은 확률로)
     private long GenerateGoldReward(int stageNumber)
     {
-        long[] rewards = { 1, 10, 50, 100, 500, 1000 };
+        long[] rewards = { 100, 100, 100, 100, 500, 1000 };
         float[] probabilities = { 0.5f, 0.3f, 0.1f, 0.07f, 0.02f, 0.01f };
 
         return GenerateWeightedRandom(rewards, probabilities);

@@ -5829,7 +5829,7 @@ MonoBehaviour:
   - unlockCostText: {fileID: 1804475433}
     unlockButton: {fileID: 14501075}
     buyCostText: {fileID: 697109713}
-    buyButton: {fileID: 14501075}
+    buyButton: {fileID: 73955001}
     unlockObject: {fileID: 1480083391}
   resetPurchaseButton: {fileID: 1091751303}
 --- !u!4 &1215679480
